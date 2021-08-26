@@ -21,12 +21,6 @@ const useStyles = makeStyles((theme) => ({
         padding:'10px',
         color:'black'
     },
-    cardHover:{
-        '&:hover': {
-            transform: `scale(${1.03})`,
-        },
-        transition: `all 0.2s ease-out`
-    },
     titleText:{
         margin:'0',
         fontSize:'34px',
@@ -60,7 +54,7 @@ const StateCard = ({stateInfo}) => {
     const classes = useStyles();
     return (
         <Fragment>
-            <Grid className={classes.cardHover} item xs={6} sm={6} md={6} lg={6} xl={6}>
+            <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
                 <div className={classes.cardStyle}>
                   <div>
                         <h1 className={classes.titleText}>Cases</h1>
@@ -68,7 +62,7 @@ const StateCard = ({stateInfo}) => {
                    </div>
                 </div>
             </Grid>
-            <Grid className={classes.cardHover} item xs={6} sm={6} md={6} lg={6} xl={6}>
+            <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
                 <div className={classes.cardStyle} >
                     <div>
                         <h1 className={classes.titleText}>Deaths</h1>
@@ -76,7 +70,7 @@ const StateCard = ({stateInfo}) => {
                     </div>
                 </div>
             </Grid>
-            <Grid className={classes.cardHover} item xs={6} sm={6} md={6} lg={6} xl={6}>
+            <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
                 <div className={classes.cardStyle}>
                     <div>
                         <h1 className={classes.titleText}>Tests</h1>
@@ -84,7 +78,7 @@ const StateCard = ({stateInfo}) => {
                     </div>
                 </div>
             </Grid>
-            <Grid className={classes.cardHover} item xs={6} sm={6} md={6} lg={6} xl={6}>
+            <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
                 <div className={classes.cardStyle} >
                     <div>
                         <h1 className={classes.titleText}>Recovered</h1>

@@ -1,5 +1,3 @@
-#CVD19 Tracker
+# CVD19 Tracker
 
-####Covid-19 web app that tracks statistics using disease.sh api and displays them accordingly.
-
-Maintained and developed by Gent Jegeni.
+#### Covid-19 web app that tracks statistics using disease.sh and displays them accordingly.

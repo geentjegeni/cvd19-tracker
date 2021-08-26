@@ -1,8 +1,10 @@
-import React, { Fragment, useState } from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import { Grid, Container } from "@material-ui/core";
-import { getOneState } from "../../../functions";
+import {getAllUsStates, getOneState} from "../../../functions";
 import StateCard from "./StateCard";
 import { makeStyles } from "@material-ui/core";
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const useStyles = makeStyles((theme) => ({
   imageContainer: {
@@ -14,9 +16,6 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 0 30px 0",
     fontSize: "9px",
     fontStyle: "italic",
-  },
-  paragraphStyleSecond: {
-    fontSize: "12px",
   },
   inputStyle: {
     width: "99%",
@@ -48,12 +47,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px",
     color: "black",
   },
-  cardHover: {
-    "&:hover": {
-      transform: `scale(${1.03})`,
-    },
-    transition: `all 0.2s ease-out`,
-  },
   titleText: {
     margin: "0",
     fontSize: "34px",
@@ -83,9 +76,10 @@ const useStyles = makeStyles((theme) => ({
 
 const StateData = () => {
   const [selectedState, setSelectedState] = useState(undefined);
+  const [allUsStates, setAllUsStates] = useState([]);
 
   const singleState = async (event, stateName) => {
-    if (event.keyCode === 13 && stateName.length > 0) {
+    if (stateName.length > 0) {
       const oneState = await getOneState(stateName);
       if (oneState) {
         setSelectedState(oneState);
@@ -93,16 +87,24 @@ const StateData = () => {
     }
   };
 
+  const getDataUS = async () => {
+    let all_datas = await getAllUsStates()
+    setAllUsStates(all_datas)
+
+  }
+
+  useEffect(()=>{
+    getDataUS();
+
+  },[])
+
   const classes = useStyles();
   return (
-    <div style={{ marginBottom: "55px" }}>
+    <div style={{ marginBottom: "55px", marginTop: "55px" }}>
       <Container>
         <h1 style={{ fontSize: "45px" }} align={"center"}>
-          Search for a specific U.S state
+          Search by U.S state
         </h1>
-        <p className={classes.paragraphStyleSecond} align={"center"}>
-          *Press enter to see the result*
-        </p>
         <Grid container spacing={3}>
           <Grid
             style={{ width: "100%" }}
@@ -113,11 +115,14 @@ const StateData = () => {
             lg={12}
             xl={12}
           >
-            <input
-              className={classes.inputStyle}
-              onKeyDown={(e) => singleState(e, e.target.value)}
-              type="text"
-              placeholder="Search by state"
+            <Autocomplete
+                options={allUsStates}
+                style={{
+                  backgroundColor: "#ffffff",
+                }}
+                onInputChange={(e, newName) => { singleState(e, newName)}}
+                getOptionLabel={(option) => option.state}
+                renderInput={(params) => <TextField {...params} label="Search by state" id="standard-basic" label="Search by country" />}
             />
           </Grid>
           {selectedState !== undefined ? (
@@ -125,7 +130,6 @@ const StateData = () => {
           ) : (
             <Fragment>
               <Grid
-                className={classes.cardHover}
                 item
                 xs={6}
                 sm={6}
@@ -145,7 +149,6 @@ const StateData = () => {
                 </div>
               </Grid>
               <Grid
-                className={classes.cardHover}
                 item
                 xs={6}
                 sm={6}
@@ -163,7 +166,6 @@ const StateData = () => {
                 </div>
               </Grid>
               <Grid
-                className={classes.cardHover}
                 item
                 xs={6}
                 sm={6}
@@ -181,7 +183,6 @@ const StateData = () => {
                 </div>
               </Grid>
               <Grid
-                className={classes.cardHover}
                 item
                 xs={6}
                 sm={6}

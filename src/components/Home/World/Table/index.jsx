@@ -7,10 +7,13 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
+        padding:'0 !important'
     },
     tableCellStyle:{
         color:'white',
@@ -30,24 +33,58 @@ const useStyles = makeStyles({
     firstCellsContainers:{
         fontFamily:'Roboto Slab',
         borderBottom: `1px solid rgb(0 0 0 / 11%)`
+    },
+    upArrowIcon:{
+        cursor:'pointer',
+        left:'56px',
+        width:'17px',
+        height:'22px',
+        position:'absolute'
+    },
+    downArrowIcon:{
+        cursor:'pointer',
+        width:'17px',
+        height:'22px',
+        left:'72px',
+        position:'absolute'
+    },
+    upArrowIconSecondary:{
+        cursor:'pointer',
+        left:'64px',
+        width:'17px',
+        height:'22px',
+        position:'absolute'
+    },
+    downArrowIconSecondary:{
+        cursor:'pointer',
+        width:'17px',
+        height:'22px',
+        left:'80px',
+        position:'absolute'
     }
 });
 
 
 
-const TableData = ({datas}) => {
+const TableData = ({datas, filterData, selected}) => {
     const classes = useStyles();
 
     return(
         <Fragment>
             <TableContainer className={classes.tableContainer} component={Paper}>
                 <Table className={classes.table} size="small" aria-label="a dense table">
-                    <TableHead style={{backgroundColor:'black', height:'50px'}}>
-                        <TableRow  >
+                    <TableHead style={{backgroundColor:'black', height:'40px'}}>
+                        <TableRow>
                             <TableCell className={classes.tableCellStyle}>Country</TableCell>
-                            <TableCell className={classes.tableCellStyle}>Cases</TableCell>
+                            <TableCell style={{position: 'relative'}} className={classes.tableCellStyle}>Cases
+                            <ArrowUpwardIcon className={classes.upArrowIcon} style={{ color: selected === "UPCASES" ? 'yellow' : 'white'}} onClick={() => filterData("UPCASES")}/>
+                            <ArrowDownwardIcon style={{ color: selected === "DOWNCASES" ? 'yellow' : 'white',}} className={classes.downArrowIcon} onClick={() => filterData("DOWNCASES")}/>
+                            </TableCell>
                             <TableCell className={classes.tableCellStyle}>Today Cases</TableCell>
-                            <TableCell className={classes.tableCellStyle}>Deaths</TableCell>
+                            <TableCell style={{position: 'relative'}} className={classes.tableCellStyle}>Deaths
+                            <ArrowUpwardIcon className={classes.upArrowIconSecondary} style={{ color: selected === "UPDEATHS" ? 'yellow' : 'white'}} onClick={() => filterData("UPDEATHS")}/>
+                            <ArrowDownwardIcon className={classes.downArrowIconSecondary} style={{ color: selected === "DOWNDEATHS" ? 'yellow' : 'white',}} onClick={() => filterData("DOWNDEATHS")}/>
+                            </TableCell>
                             <TableCell className={classes.tableCellStyle}>Today Deaths</TableCell>
                         </TableRow>
                     </TableHead>
