@@ -1,7 +1,13 @@
 import axios from "axios";
 
-export const getAllContinents = () => {
+export const getAllCountries = () => {
     return axios.get("https://disease.sh/v3/covid-19/countries")
+        .then(response => response.data)
+        .catch(err => console.log(err))
+}
+
+export const getAllUsStates = () => {
+    return axios.get("https://disease.sh/v3/covid-19/states\n")
         .then(response => response.data)
         .catch(err => console.log(err))
 }

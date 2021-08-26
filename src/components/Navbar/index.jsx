@@ -110,6 +110,7 @@ function Navbar() {
         </div>
         <div className={classes.navTextHolders}>
           <h1
+              style={ widthSet ? {display:'none'} : {display: 'block'}}
               className={classes.mainNavText}
           >
             Contact me
