@@ -122,7 +122,7 @@ const StateData = () => {
                 }}
                 onInputChange={(e, newName) => { singleState(e, newName)}}
                 getOptionLabel={(option) => option.state}
-                renderInput={(params) => <TextField {...params} label="Search by state" id="standard-basic" label="Search by country" />}
+                renderInput={(params) => <TextField {...params} label="Search by state" id="standard-basic" label="Search by state" />}
             />
           </Grid>
           {selectedState !== undefined ? (
